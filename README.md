@@ -1,3 +1,5 @@
+![](warhol.png)
+
 # Warholizer 🎨
 
 Generate Andy‑Warhol–style pop‑art grids from any photograph with a single command‑line call.
