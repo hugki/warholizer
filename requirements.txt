@@ -1,0 +1,4 @@
+opencv-python
+numpy
+pillow
+# scikit-image  # Optional: for higher-quality dithering, segmentation, etc. 
