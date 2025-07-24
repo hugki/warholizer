@@ -93,30 +93,37 @@ See `warholizer.py` for fully‑commented code.
 
 ---
 
-## 🗺️  Roadmap
+## 🗺️  Roadmap — Uncaptured Warhol Essence
 
-### Short‑term (v0.2.x)
+This project already nails the **flat palette, crisp line‑work, mis‑registration, halftone dots** and **grid repetition** that define Warhol’s most recognisable prints. What’s still missing are the subtler, more tactile artefacts of hand‑pulled silkscreen prints and the sociocultural context that gives them punch. Below is a research‑driven roadmap focused on those gaps.
 
-* **Plugin FX architecture** – supply `--fx myfilter.py` to chain custom post‑effects.
-* **GPU k‑means** via cuML for faster batch renders.
-* **Config file** (`warholizer.toml`) to save favourite palettes & CLI presets.
-* **Visual regression tests** – CI renders golden sample set on every PR.
+| Targeted Warhol trait                                                             | Current status            | Planned approach                                                                                      |
+| --------------------------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Ink‑bleed & wicking** <br> Soft halo where solvent spreads into paper fibres    | Not modelled              | Build a physics‑inspired convolution kernel; calibrate using scanned macro shots of original prints.  |
+| **Stencil wear & pinholes** <br> Tiny random specks where emulsion washed out     | Absent                    | Procedural “salt‑noise” mask whose density decays with virtual print run length (≈ edition size).     |
+| **Edge drag / squeegee streaks**                                                  | Only straight black edges | Directional motion‑blur mask modulated by pressure maps; allow user to randomise per colour pass.     |
+| **Metallic / Day‑Glo inks**                                                       | RGB gamut only            | Spectral‑to‑sRGB LUTs for fluorescent pigments; optional add‑on channel rendered with additive blend. |
+| **Paper & canvas texture**                                                        | Implicitly flat           | Normal‑mapped paper scans (cold‑press, canvas, Lenox) applied via overlay & displacement.             |
+| **Edition annotations** <br> Signature, “Edition 17/250”, stamp                   | None                      | OCR‑style font + Bézier‑jittered pen path; CLI flag `--sign "A. WARHOL 1985"`.                        |
+| **Source multiplicity** <br> Same headshot recycled across series                 | Single input only         | Batch mode: one input as *key* image, auto‑vary palettes & noise, sheet layout template generator.    |
+| **Cultural commentary layer** <br> Celebrity commodification, mass media critique | Outside code scope        | Provide prompt hooks for caption overlays & AI‑generated headlines to simulate tabloid context.       |
 
-### Mid‑term (v0.3.x)
+### Milestones
 
-* **Desktop GUI** (Tk or Electron) for drag‑and‑drop usage.
-* **Animated output** – cycle palettes per frame to produce GIF/MP4 loops.
-* **Metallic & glitter inks** – texture‑based overlays with normal‑map lighting.
+1. **v0.2 — Tactile Pass**
+   Ink‑bleed kernel + paper normals; expose `--grain`, `--texture`.
+2. **v0.3 — Physical Edition Simulator**
+   Stencil‑decay noise & squeegee streaks; print‑run iteration mode.
+3. **v0.4 — Fluorescent & Metallic**
+   Day‑Glo LUTs, metallic specular pass with environment‑mapped highlights.
+4. **v1.0 — Contextual Pop**
+   Batch celebrity mode, caption hooks, signature/edition annotation.
 
-### Long‑term (v1.0)
-
-* **WebAssembly build** to run entirely in the browser.
-* **Learned ink‑bleed model** – lightweight style‑transfer fine‑tuned on Warhol catalogue.
-* **Preset marketplace** so the community can share palettes, halftone patterns, etc.
+> These steps aim to shift Warholizer from a *stylistic filter* toward a **faithful silkscreen simulator and cultural remix tool**.
 
 ---
 
-## 📜  License
+## 📜  License  License
 
 MIT — do whatever you want, but attribution appreciated.
 
